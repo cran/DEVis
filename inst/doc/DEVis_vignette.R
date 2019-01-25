@@ -14,8 +14,10 @@ knitr::opts_chunk$set(fig.path='figure/graphics-',
 suppressWarnings({
 library(kableExtra)
 })
+library(rmarkdown)
 library(knitr)
-options(knitr.table.format = "latex") 
+options(knitr.table.format = "html") 
+options(kableExtra.latex.load_packages = FALSE)
 
 ## ----initProjHide, echo = FALSE, eval = TRUE, results='hide', message=FALSE, warning=FALSE----
 #This section hidden because it's correcting for relative paths and I want to show
@@ -73,19 +75,19 @@ set_output_mode("screen")
 
 ## ----dataTable, echo= FALSE, eval= TRUE----------------------------------
 
-kable(sampSummary, format = "latex", caption = "Summary of Data", booktabs = TRUE) %>%
-kable_styling(latex_options = c("striped", "hold_position"))
+kable(sampSummary, format = "html", caption = "Summary of Data", booktabs = TRUE) %>%
+kable_styling(bootstrap_options = c("striped", "hold_position"))
 
 ## ----countFormat, echo = FALSE, eval = TRUE------------------------------
 #Sample format for count data.
-kable(head(count_data[,1:4]), format = "latex", booktabs = TRUE) %>%
-kable_styling(latex_options = c("striped", "scale_down"))
+kable(head(count_data[,1:4]), format = "html", booktabs = TRUE) %>%
+kable_styling(bootstrap_options = c("striped", "scale_down"))
 
 
 ## ----targetFormat, echo = FALSE, eval = TRUE-----------------------------
 #Sample format for target data.
-kable(head(target_data[1:4,]), format = "latex", booktabs = TRUE) %>%
-kable_styling(latex_options = c("striped", "scale_down"))
+kable(head(target_data[1:4,]), format = "html", booktabs = TRUE) %>%
+kable_styling(bootstrap_options = c("striped", "scale_down"))
 
 ## ----initProjShow, echo = TRUE, eval = FALSE, results='hide', message=FALSE, warning=FALSE----
 #  library(DEVis)
@@ -141,8 +143,8 @@ kable_styling(latex_options = c("striped", "scale_down"))
 #  #'      /poisson/
 
 ## ----startTgt, echo = FALSE, eval = TRUE---------------------------------
-kable(head(target_data), format = "latex", booktabs = TRUE) %>%
-kable_styling(latex_options = c("striped", "scale_down"))
+kable(head(target_data), format = "html", booktabs = TRUE) %>%
+kable_styling(bootstrap_options = c("striped", "scale_down"))
 
 ## ----prepComposite, echo = TRUE, eval = TRUE, results='show', message=FALSE, warning=FALSE----
 #Create a composite field for treatment and time.
@@ -153,8 +155,8 @@ target_data <- make_composite_field(c("time","treatment", "donor"))
 
 
 ## ----endTgt, echo = FALSE, eval = TRUE-----------------------------------
-kable(head(target_data), format = "latex", booktabs = TRUE) %>%
-kable_styling(latex_options = c("striped", "scale_down"))
+kable(head(target_data), format = "html", booktabs = TRUE) %>%
+kable_styling(bootstrap_options = c("striped", "scale_down"))
 
 ## ----filterData, echo = TRUE, eval = TRUE, results='show', message=FALSE, warning=FALSE----
 
@@ -309,11 +311,11 @@ de_profile_plot(result_list,filename="DE_profile_upReg_10.pdf",
                 sort_choice="max", numGenes=25, theme=1)
 
 ## ----doHeat2, echo = TRUE, eval = TRUE, results='hide', message=FALSE, warning=FALSE, fig.height = 7, fig.width = 7, fig.align = "center"----
-de_heat(result_list, anno_columns=c("time", "treatment"), 
-        filename="upReg_heatmap.pdf", sort_choice="max", 
-        specific_genes=c("CCL4L2", "IL29", "IRG1", "IL12A"),
-        cluster_contrasts=FALSE,
-        theme=2)
+#de_heat(result_list, anno_columns=c("time", "treatment"), 
+ #       filename="upReg_heatmap.pdf", sort_choice="max", 
+ #       specific_genes=c("CCL4L2", "IL29", "IRG1", "IL12A"),
+  #      cluster_contrasts=FALSE,
+   #     theme=2)
 
 ## ----doGenePlot, echo = TRUE, eval = TRUE, results='hide', message=FALSE, warning=FALSE, fig.height = 7, fig.width = 7, fig.align = "center"----
 plot_gene(filename="IL29.pdf", gene_name="IL29", 
